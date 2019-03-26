@@ -7,8 +7,63 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Nombre</ion-label>
+        <ion-input
+          type="text"
+          placeholder="A place .."
+          name="nombre"
+          ngModel
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Apellido</ion-label>
+        <ion-input
+          name="apellido"
+          ngModel
+          required>
+        </ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col text-center>
+          <h5>Toma una foto ..</h5>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button
+            ion-button
+            icon-left
+            block
+            outline
+            type="button"
+            (click)="onTakePhoto()">
+            <ion-icon name="camera"></ion-icon>
+            Tomar Foto
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="imageUrl != ''">
+        <ion-col>
+          <img [src]="imageUrl">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button
+            ion-button
+            color="secondary"
+            block
+            type="submit"
+            [disabled]="!f.valid || imageUrl == ''">
+            Agregar
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>
